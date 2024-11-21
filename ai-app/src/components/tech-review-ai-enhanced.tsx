@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -10,7 +12,7 @@ import { Check, Copy, Wand2 } from 'lucide-react';
 // SEO Analysis Utility
 const analyzeSEO = (content, keywords) => {
   const keywordsList = keywords.split(',').map(k => k.trim().toLowerCase());
-  
+
   const analysis = {
     keywordDensity: {},
     readabilityScore: 0,
@@ -30,10 +32,10 @@ const analyzeSEO = (content, keywords) => {
   analysis.readabilityScore = 206.835 - 1.015 * (words / sentences) - 84.6 * (sentences / words);
 
   // Heading Optimization Check
-  analysis.headingOptimization = 
-    content.includes('# ') && 
-    content.includes('## ') && 
-    keywordsList.some(keyword => 
+  analysis.headingOptimization =
+    content.includes('# ') &&
+    content.includes('## ') &&
+    keywordsList.some(keyword =>
       content.toLowerCase().includes(keyword)
     );
 
@@ -84,7 +86,7 @@ const TechReviewAIEnhanced = () => {
 
   // Categories and Advanced Configuration
   const categories = [
-    'Smartphones', 'Laptops', 'Tablets', 'Wearables', 
+    'Smartphones', 'Laptops', 'Tablets', 'Wearables',
     'Gaming Devices', 'Audio Equipment', 'Smart Home Devices'
   ];
 
@@ -94,9 +96,9 @@ const TechReviewAIEnhanced = () => {
     try {
       // Simulated AI Content Generation
       const content = await generateAIContent(
-        productName, 
-        productCategory, 
-        keyFeatures, 
+        productName,
+        productCategory,
+        keyFeatures,
         seoKeywords
       );
 
@@ -134,12 +136,12 @@ const TechReviewAIEnhanced = () => {
               <TabsTrigger value="generator">Content Generator</TabsTrigger>
               <TabsTrigger value="seoAnalysis">SEO Analysis</TabsTrigger>
             </TabsList>
-            
+
             {/* Content Generator Tab */}
             <TabsContent value="generator">
               <div className="space-y-4">
                 {/* Input Fields */}
-                <Input 
+                <Input
                   placeholder="Enter Product Name (e.g., iPhone 15 Pro)"
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
@@ -158,20 +160,20 @@ const TechReviewAIEnhanced = () => {
                   </SelectContent>
                 </Select>
 
-                <Textarea 
+                <Textarea
                   placeholder="Enter Key Features (comma-separated)"
                   value={keyFeatures}
                   onChange={(e) => setKeyFeatures(e.target.value)}
                 />
 
-                <Input 
+                <Input
                   placeholder="Enter SEO Keywords (comma-separated)"
                   value={seoKeywords}
                   onChange={(e) => setSEOKeywords(e.target.value)}
                 />
 
                 {/* Generate Content Button */}
-                <Button 
+                <Button
                   onClick={handleGenerateContent}
                   disabled={!productName || !productCategory || isGenerating}
                   className="w-full"
@@ -184,15 +186,15 @@ const TechReviewAIEnhanced = () => {
                   <Card>
                     <CardHeader className="flex flex-row justify-between items-center">
                       <CardTitle>Generated Review Content</CardTitle>
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         onClick={handleCopyContent}
                       >
                         {isCopied ? <Check className="text-green-500" /> : <Copy />}
                       </Button>
                     </CardHeader>
                     <CardContent>
-                      <Textarea 
+                      <Textarea
                         value={generatedContent}
                         readOnly
                         className="h-64"
@@ -225,7 +227,7 @@ const TechReviewAIEnhanced = () => {
                         <p>Readability Score: {seoAnalysis.readabilityScore.toFixed(2)}</p>
                         <p>Content Length: {seoAnalysis.contentLength} characters</p>
                         <p>
-                          Heading Optimization: 
+                          Heading Optimization:
                           {seoAnalysis.headingOptimization ? '✓ Optimized' : '✗ Needs Improvement'}
                         </p>
                       </div>
